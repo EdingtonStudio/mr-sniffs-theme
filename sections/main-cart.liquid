@@ -1,0 +1,46 @@
+{% comment %} Full cart page — fallback for the drawer. {% endcomment %}
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">{{ 'cart.title' | t }}</h1>
+  </header>
+
+  {%- if cart.item_count == 0 -%}
+    <div class="cart-drawer__empty">
+      <img src="{{ 'mascot-white.svg' | asset_url }}" alt="" aria-hidden="true" class="cart-drawer__mascot" width="88" height="88">
+      <p class="cart-drawer__empty-copy">{{ 'cart.empty' | t }}</p>
+      <a href="{{ routes.all_products_collection_url }}" class="cart-drawer__empty-link">{{ 'cart.empty_link' | t }} →</a>
+    </div>
+  {%- else -%}
+    <form action="{{ routes.cart_url }}" method="post">
+      <ul class="cart-drawer__lines" style="padding: 0;">
+        {%- for item in cart.items -%}
+          {%- assign accent = item.product.metafields.custom.flavor_tag_color.value -%}
+          <li class="cart-drawer__line"{% if accent %} style="--line-accent: {{ accent }}"{% endif %}>
+            <div class="cart-drawer__line-media">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 104 }}" alt="{{ item.image.alt | default: item.product.title | escape }}" width="52" height="52" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div class="cart-drawer__line-info">
+              <span class="cart-drawer__line-name">{{ item.product.title }}</span>
+              <span class="cart-drawer__line-meta">Qty {{ item.quantity }} · {{ item.final_line_price | money_without_trailing_zeros }}</span>
+            </div>
+            <a href="{{ item.url_to_remove }}" class="cart-drawer__remove">{{ 'cart.remove' | t }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <div class="cart-drawer__subtotal" style="margin-top: 1.5rem;">
+        <span>{{ 'cart.subtotal' | t }}</span>
+        <span>{{ cart.total_price | money_without_trailing_zeros }}</span>
+      </div>
+      <button type="submit" name="checkout" class="cart-drawer__checkout">{{ 'cart.checkout' | t }}</button>
+    </form>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "settings": []
+}
+{% endschema %}

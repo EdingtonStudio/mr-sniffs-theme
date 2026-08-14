@@ -1,0 +1,115 @@
+{%- assign accent = product.metafields.custom.flavor_tag_color.value -%}
+<article class="pdp"{% if accent %} style="--color-accent: {{ accent }}"{% endif %}>
+  <div class="pdp__top">
+    <div class="pdp__gallery">
+      {%- if product.images.size > 0 -%}
+        {%- for image in product.images limit: 2 -%}
+          <div class="pdp__frame{% if forloop.index == 2 %} pdp__frame--offset{% endif %}">
+            <img
+              src="{{ image | image_url: width: 1100 }}"
+              srcset="{{ image | image_url: width: 550 }} 550w, {{ image | image_url: width: 1100 }} 1100w"
+              sizes="(max-width: 900px) 50vw, 35vw"
+              alt="{{ image.alt | default: product.title | escape }}"
+              width="1100"
+              height="{{ 1100 | divided_by: image.aspect_ratio | round }}"
+              loading="eager"
+            >
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <div class="pdp__frame">
+          <img src="{{ 'hero-burn-notice.jpg' | asset_url }}" alt="{{ product.title | escape }} incense, dramatic shot" width="1600" height="1067">
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="pdp__profile">
+      <h1 class="visually-hidden">{{ product.title }}</h1>
+      <span
+        class="flavor-tag flavor-tag--solid flavor-tag--lg flavor-tag--rotate pdp__name-tag"
+        {% if accent %}style="--tag-color: {{ accent }}"{% endif %}
+        aria-hidden="true"
+      >{{ product.title }}</span>
+
+      {%- assign notes = product.metafields.custom.note_pairing.value -%}
+      {%- if notes -%}
+        <p class="pdp__notes">{{ notes }}</p>
+      {%- endif -%}
+
+      {%- assign moods = product.metafields.custom.mood_tags.value -%}
+      {%- if moods -%}
+        <ul class="pdp__moods">
+          {%- for mood in moods -%}
+            <li class="pdp__mood">{{ mood }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+
+      {%- assign burn = product.metafields.custom.burn_time.value -%}
+      {%- if burn -%}
+        <p class="pdp__burn-time">
+          <span class="pdp__burn-time-label">{{ 'products.product.burn_time' | t }}</span> {{ burn }}
+        </p>
+      {%- endif -%}
+
+      {%- if product.description != blank -%}
+        <div class="pdp__desc">{{ product.description }}</div>
+      {%- endif -%}
+
+      <p class="pdp__price">{{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }}</p>
+
+      {%- form 'product', product, class: 'product-form' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        {%- if product.selected_or_first_available_variant.available -%}
+          <button type="submit" class="btn-loud pdp__cta">{{ 'products.product.add_to_cart' | t }}</button>
+        {%- else -%}
+          <button type="button" class="btn-loud btn-loud--disabled pdp__cta" disabled>{{ 'products.product.sold_out' | t }}</button>
+        {%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+
+  {%- liquid
+    assign other = blank
+    for p in collections.all.products
+      unless p.handle == product.handle or p.handle == section.settings.exclude_handle
+        assign other = p
+        break
+      endunless
+    endfor
+  -%}
+  {%- if other != blank -%}
+    <section class="pdp__other">
+      <p class="pdp__other-kicker">{{ section.settings.other_kicker }}</p>
+      <a href="{{ other.url }}" class="pdp__other-card">
+        <span class="pdp__other-name">{{ other.title }}</span>
+        {%- assign other_notes = other.metafields.custom.note_pairing.value -%}
+        {%- if other_notes -%}
+          <span class="pdp__other-notes">{{ other_notes }}</span>
+        {%- endif -%}
+        <span class="pdp__other-arrow" aria-hidden="true">→</span>
+      </a>
+    </section>
+  {%- endif -%}
+</article>
+
+{% schema %}
+{
+  "name": "Product page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "other_kicker",
+      "label": "\"Other one\" kicker",
+      "default": "The Other One"
+    },
+    {
+      "type": "text",
+      "id": "exclude_handle",
+      "label": "Handle to exclude from \"The Other One\"",
+      "info": "e.g. duo-bundle, so the bundle never shows as the cross-sell",
+      "default": "duo-bundle"
+    }
+  ]
+}
+{% endschema %}

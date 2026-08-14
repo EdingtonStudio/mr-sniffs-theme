@@ -1,0 +1,43 @@
+{
+  "general": {
+    "404": {
+      "title": "Whiffed It.",
+      "subtext": "This page doesn't exist. It might have burned out.",
+      "link": "Back To The Good Smells"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search",
+      "submit": "Search",
+      "no_results": "Nothing came up. Try a different word for smoke."
+    },
+    "password_page": {
+      "opening_soon": "Opening Soon",
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter"
+    }
+  },
+  "cart": {
+    "title": "Your Haul",
+    "empty": "Nothing here yet. Mr. Sniff is disappointed but not surprised.",
+    "empty_link": "Go pick a fight with your nose",
+    "subtotal": "Subtotal",
+    "checkout": "Order Now",
+    "remove": "Remove"
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add To Cart",
+      "sold_out": "Sold Out",
+      "burn_time": "Burn time"
+    }
+  },
+  "newsletter": {
+    "label": "Get first whiff of new scents",
+    "placeholder": "your@email.com",
+    "submit": "Sign Up",
+    "confirmation": "You're in. Try not to burn the place down."
+  }
+}

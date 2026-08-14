@@ -1,0 +1,65 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <p class="page-kicker">{{ section.settings.kicker }}</p>
+    <h1 class="narrow-page__title">{{ section.settings.title }}</h1>
+  </header>
+  <div class="faq-list">
+    {%- for block in section.blocks -%}
+      <section class="edit-section{% if forloop.last %} edit-section--last{% endif %}" {{ block.shopify_attributes }}>
+        <h2 class="edit-section__heading">
+          <button
+            type="button"
+            class="edit-section__row"
+            data-accordion-row
+            aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}"
+            aria-controls="Faq-{{ block.id }}"
+          >
+            <span class="edit-section__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}/</span>
+            <span class="edit-section__label">{{ block.settings.question }}</span>
+            <span class="edit-section__toggle" aria-hidden="true"></span>
+          </button>
+        </h2>
+        <div id="Faq-{{ block.id }}" class="edit-section__panel{% if forloop.first %} is-open{% endif %}">
+          <div class="edit-section__clip">
+            <div class="edit-section__inner">
+              <p class="faq-answer">{{ block.settings.answer }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "FAQ page",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Before you burn one" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Questions, Answered." }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "question", "label": "Question" },
+        { "type": "textarea", "id": "answer", "label": "Answer" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ page",
+      "blocks": [
+        { "type": "faq", "settings": { "question": "What are these actually made of?", "answer": "Real fragrance loads on a hand-rolled stick. No shortcuts, no synthetic filler dressed up as \"essential.\" Each scent is built from a note pairing, not a mystery blend." } },
+        { "type": "faq", "settings": { "question": "How long does one stick burn?", "answer": "About 50 minutes per stick, give or take your room's airflow. Long enough to matter, short enough that you won't forget it's lit." } },
+        { "type": "faq", "settings": { "question": "I can only pick one. Which scent do I get?", "answer": "Take the Smell Test: four questions, no accounts, no email gate. Or just get both with the Duo Bundle and stop torturing yourself." } },
+        { "type": "faq", "settings": { "question": "Is it safe to burn indoors?", "answer": "Yes, with the same common sense you'd use for any open flame: burn on a heatproof holder, keep it away from anything flammable, don't leave it unattended, and keep it clear of kids and pets." } },
+        { "type": "faq", "settings": { "question": "Where do you ship?", "answer": "Currently the U.S. Rates and delivery windows are calculated at checkout before you pay for anything." } },
+        { "type": "faq", "settings": { "question": "Can I return it if it's not for me?", "answer": "See our Shipping & Returns policy in the footer for the full breakdown. We're not going to bury it in fine print here." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

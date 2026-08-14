@@ -1,0 +1,21 @@
+<section class="contact">
+  <p class="page-kicker">{{ section.settings.kicker }}</p>
+  <h1 class="contact__title">{{ section.settings.title }}</h1>
+  <p class="contact__copy">{{ section.settings.copy }}</p>
+  <a href="mailto:{{ section.settings.email }}" class="contact__cta">{{ section.settings.email }}</a>
+  <p class="contact__note">{{ section.settings.note }}</p>
+</section>
+
+{% schema %}
+{
+  "name": "Contact page",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "Say something" },
+    { "type": "text", "id": "title", "label": "Title", "default": "Get In Touch." },
+    { "type": "textarea", "id": "copy", "label": "Copy", "default": "Question about an order, a scent, or just want to tell us your neighbor complained about the smoke? We read everything." },
+    { "type": "text", "id": "email", "label": "Email address", "default": "hello@mrsniffs.com" },
+    { "type": "text", "id": "note", "label": "Note", "default": "We usually get back to you within 1-2 business days." }
+  ],
+  "presets": [{ "name": "Contact page" }]
+}
+{% endschema %}

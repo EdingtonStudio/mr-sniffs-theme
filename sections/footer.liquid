@@ -1,0 +1,89 @@
+<footer class="site-footer">
+  <div class="site-footer__wordmark-wrap" aria-hidden="true">
+    <img src="{{ 'logo-white.svg' | asset_url }}" alt="" class="site-footer__wordmark" width="1360" height="400" loading="lazy">
+  </div>
+
+  <div class="site-footer__content">
+    <div class="site-footer__inner">
+      <div class="site-footer__top">
+        <div class="site-footer__brand">
+          <p class="site-footer__tagline">{{ section.settings.tagline }}</p>
+        </div>
+
+        <div class="site-footer__nav-groups">
+          {%- if section.settings.menu_shop != blank -%}
+            <nav class="site-footer__nav-group" aria-label="{{ section.settings.menu_shop.title }}">
+              <p class="site-footer__nav-label">{{ section.settings.menu_shop.title }}</p>
+              {%- for link in section.settings.menu_shop.links -%}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- endfor -%}
+            </nav>
+          {%- endif -%}
+          {%- if section.settings.menu_support != blank -%}
+            <nav class="site-footer__nav-group" aria-label="{{ section.settings.menu_support.title }}">
+              <p class="site-footer__nav-label">{{ section.settings.menu_support.title }}</p>
+              {%- for link in section.settings.menu_support.links -%}
+                <a href="{{ link.url }}">{{ link.title }}</a>
+              {%- endfor -%}
+            </nav>
+          {%- endif -%}
+        </div>
+
+        <div class="site-footer__newsletter">
+          {% render 'newsletter-form' %}
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer__inner">
+      <div class="site-footer__bottom">
+        {%- if settings.social_instagram != blank -%}
+          <a
+            href="{{ settings.social_instagram }}"
+            target="_blank"
+            rel="noreferrer noopener"
+            aria-label="{{ shop.name }} on Instagram"
+            class="site-footer__social"
+          >
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </a>
+        {%- endif -%}
+        <p class="site-footer__copyright">© {{ 'now' | date: '%Y' }} {{ shop.name }}. {{ section.settings.sign_off }}</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "text",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Handcrafted incense for people who actually have a nose."
+    },
+    {
+      "type": "link_list",
+      "id": "menu_shop",
+      "label": "First menu (Shop)"
+    },
+    {
+      "type": "link_list",
+      "id": "menu_support",
+      "label": "Second menu (Support)"
+    },
+    {
+      "type": "text",
+      "id": "sign_off",
+      "label": "Copyright sign-off",
+      "default": "We just make scents."
+    }
+  ]
+}
+{% endschema %}

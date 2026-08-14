@@ -1,0 +1,12 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-collection",
+      "settings": {
+        "kicker": "The whole line",
+        "title": "Every Scent. Zero Chill."
+      }
+    }
+  },
+  "order": ["main"]
+}

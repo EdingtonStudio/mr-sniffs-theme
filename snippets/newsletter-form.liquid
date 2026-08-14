@@ -1,0 +1,28 @@
+{% comment %}
+  Newsletter signup via the Shopify customer form — captures the address as a
+  customer tagged "newsletter" in admin (works with Shopify Email / Klaviyo).
+{% endcomment %}
+{%- form 'customer', class: 'newsletter-form' -%}
+  {%- if form.posted_successfully? -%}
+    <p class="newsletter-form__confirm">{{ 'newsletter.confirmation' | t }}</p>
+  {%- else -%}
+    <input type="hidden" name="contact[tags]" value="newsletter">
+    <label for="NewsletterEmail-{{ form.id }}" class="newsletter-form__label">{{ 'newsletter.label' | t }}</label>
+    <div class="newsletter-form__row">
+      <input
+        id="NewsletterEmail-{{ form.id }}"
+        type="email"
+        name="contact[email]"
+        class="newsletter-form__input"
+        value="{{ form.email }}"
+        required
+        placeholder="{{ 'newsletter.placeholder' | t }}"
+        autocomplete="email"
+      >
+      <button type="submit" class="newsletter-form__submit">{{ 'newsletter.submit' | t }}</button>
+    </div>
+    {%- if form.errors -%}
+      <p class="newsletter-form__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+    {%- endif -%}
+  {%- endif -%}
+{%- endform -%}

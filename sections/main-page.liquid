@@ -1,0 +1,15 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">{{ page.title }}</h1>
+  </header>
+  <div class="narrow-page__body">
+    {{ page.content }}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Page",
+  "settings": []
+}
+{% endschema %}

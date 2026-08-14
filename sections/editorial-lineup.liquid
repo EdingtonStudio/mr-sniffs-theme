@@ -1,0 +1,58 @@
+{% comment %}
+  Numbered editorial accordion row containing the product lineup grid.
+{% endcomment %}
+{%- liquid
+  if section.settings.collection != blank
+    assign products = section.settings.collection.products
+  else
+    assign products = collections.all.products
+  endif
+  assign count = products.size | at_most: section.settings.max_products
+  assign count_label = count | prepend: '0' | slice: -2, 2
+-%}
+<section class="edit-section">
+  <h2 class="edit-section__heading">
+    <button
+      type="button"
+      class="edit-section__row"
+      data-accordion-row
+      aria-expanded="{{ section.settings.open_by_default }}"
+      aria-controls="Panel-{{ section.id }}"
+    >
+      <span class="edit-section__num">{{ section.settings.number }}</span>
+      <span class="edit-section__label">{{ section.settings.heading }}</span>
+      <span class="edit-section__note">{{ count_label }} Products</span>
+      <span class="edit-section__toggle" aria-hidden="true"></span>
+    </button>
+  </h2>
+  <div id="Panel-{{ section.id }}" class="edit-section__panel{% if section.settings.open_by_default %} is-open{% endif %}">
+    <div class="edit-section__clip">
+      <div class="edit-section__inner">
+        <div class="product-grid">
+          {%- for product in products limit: section.settings.max_products -%}
+            {% render 'product-card', card_product: product %}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Lineup row",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Row number", "default": "01/" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Lineup" },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Leave empty to show all products. Order products via the collection's manual sort."
+    },
+    { "type": "range", "id": "max_products", "label": "Max products", "min": 3, "max": 12, "step": 1, "default": 6 },
+    { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": true }
+  ],
+  "presets": [{ "name": "Lineup row" }]
+}
+{% endschema %}

@@ -1,0 +1,10 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">Collections</h1>
+  </header>
+  <ul class="search-results">
+    {%- for collection in collections -%}
+      <li><a href="{{ collection.url }}">{{ collection.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+</section>

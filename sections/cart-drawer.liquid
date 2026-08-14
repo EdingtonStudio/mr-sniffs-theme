@@ -1,0 +1,127 @@
+{% comment %}
+  AJAX cart drawer. theme.js re-fetches this section (Section Rendering API)
+  after every cart change and swaps [data-cart-drawer-content].
+{% endcomment %}
+<div class="cart-backdrop" data-cart-backdrop aria-hidden="true"></div>
+<aside
+  class="cart-drawer"
+  data-cart-drawer
+  data-item-count="{{ cart.item_count }}"
+  aria-label="Cart"
+  aria-hidden="true"
+>
+  <div data-cart-drawer-content>
+    <header class="cart-drawer__header">
+      <h2 class="cart-drawer__title">
+        {%- if cart.item_count > 0 -%}{{ 'cart.title' | t }}{%- else -%}{{ shop.name }}{%- endif -%}
+      </h2>
+      <button type="button" class="cart-drawer__close" data-cart-close aria-label="Close cart">✕</button>
+    </header>
+
+    {%- if cart.item_count == 0 -%}
+      <div class="cart-drawer__empty">
+        <img src="{{ 'mascot-white.svg' | asset_url }}" alt="" aria-hidden="true" class="cart-drawer__mascot" width="88" height="88">
+        <p class="cart-drawer__empty-copy">{{ 'cart.empty' | t }}</p>
+        <a href="{{ section.settings.empty_link | default: routes.all_products_collection_url }}" class="cart-drawer__empty-link">
+          {{ 'cart.empty_link' | t }} →
+        </a>
+      </div>
+    {%- else -%}
+      <ul class="cart-drawer__lines">
+        {%- for item in cart.items -%}
+          {%- assign accent = item.product.metafields.custom.flavor_tag_color.value -%}
+          <li class="cart-drawer__line"{% if accent %} style="--line-accent: {{ accent }}"{% endif %}>
+            <div class="cart-drawer__line-media">
+              {%- if item.image -%}
+                <img src="{{ item.image | image_url: width: 104 }}" alt="{{ item.image.alt | default: item.product.title | escape }}" width="52" height="52" loading="lazy">
+              {%- endif -%}
+            </div>
+            <div class="cart-drawer__line-info">
+              <span class="cart-drawer__line-name">{{ item.product.title }}</span>
+              <span class="cart-drawer__line-meta">Qty {{ item.quantity }} · {{ item.final_line_price | money_without_trailing_zeros }}</span>
+            </div>
+            <button
+              type="button"
+              class="cart-drawer__remove"
+              data-cart-remove="{{ item.key }}"
+              aria-label="Remove {{ item.product.title | escape }}"
+            >
+              {{ 'cart.remove' | t }}
+            </button>
+          </li>
+        {%- endfor -%}
+      </ul>
+
+      {%- liquid
+        assign bundle = section.settings.upsell_product
+        assign show_upsell = false
+        if bundle != blank and bundle.available
+          assign show_upsell = true
+          assign scent_count = 0
+          for item in cart.items
+            if item.product.handle == bundle.handle
+              assign show_upsell = false
+            elsif item.product.type == 'Incense'
+              assign scent_count = scent_count | plus: 1
+            endif
+          endfor
+          if scent_count >= 2
+            assign show_upsell = false
+          endif
+        endif
+      -%}
+      {%- if show_upsell -%}
+        <div class="cart-drawer__upsell">
+          <p class="cart-drawer__upsell-copy">{{ section.settings.upsell_copy }}</p>
+          <button
+            type="button"
+            class="cart-drawer__upsell-btn"
+            data-cart-upsell="{{ bundle.selected_or_first_available_variant.id }}"
+          >
+            {{ section.settings.upsell_button }}
+          </button>
+        </div>
+      {%- endif -%}
+
+      <footer class="cart-drawer__footer">
+        <div class="cart-drawer__subtotal">
+          <span>{{ 'cart.subtotal' | t }}</span>
+          <span>{{ cart.total_price | money_without_trailing_zeros }}</span>
+        </div>
+        <form action="{{ routes.cart_url }}" method="post">
+          <button type="submit" name="checkout" class="cart-drawer__checkout">{{ 'cart.checkout' | t }}</button>
+        </form>
+      </footer>
+    {%- endif -%}
+  </div>
+</aside>
+
+{% schema %}
+{
+  "name": "Cart drawer",
+  "settings": [
+    {
+      "type": "url",
+      "id": "empty_link",
+      "label": "Empty-cart link"
+    },
+    {
+      "type": "product",
+      "id": "upsell_product",
+      "label": "Upsell product (Duo Bundle)"
+    },
+    {
+      "type": "text",
+      "id": "upsell_copy",
+      "label": "Upsell copy",
+      "default": "Not sure? The Duo Bundle gets you both scents. Stop overthinking it."
+    },
+    {
+      "type": "text",
+      "id": "upsell_button",
+      "label": "Upsell button label",
+      "default": "Add the Duo Bundle"
+    }
+  ]
+}
+{% endschema %}

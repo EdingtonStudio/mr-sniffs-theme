@@ -1,0 +1,120 @@
+{% comment %}
+  50/50 editorial hero. Desktop: midnight panel left, full-bleed photo right,
+  one-line stroke headline overlapping the seam with scroll parallax.
+  Mobile: full-width photo with a 20% overlay, headline in two lines.
+{% endcomment %}
+<section class="hero" aria-label="{{ shop.name }}: {{ section.settings.headline_1 }} {{ section.settings.headline_2 | downcase }}">
+  <h1 class="hero__headline" data-parallax="0.35">
+    <span class="seg">{{ section.settings.headline_1 }}</span>
+    <span class="seg">{{ section.settings.headline_2 }}</span>
+  </h1>
+
+  <div class="hero__panel">
+    <p class="hero__lede">{{ section.settings.lede }}</p>
+
+    <div class="hero__foot">
+      <div class="hero__cta-row">
+        {%- if section.settings.cta_primary_label != blank -%}
+          <a href="{{ section.settings.cta_primary_link }}" class="hero__order-btn">{{ section.settings.cta_primary_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.cta_secondary_label != blank -%}
+          <a href="{{ section.settings.cta_secondary_link }}" class="hero__smell-test">{{ section.settings.cta_secondary_label }}</a>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <dl class="hero__meta">
+          {%- for block in section.blocks -%}
+            <div class="hero__meta-col" {{ block.shopify_attributes }}>
+              <dt class="hero__meta-label">{{ block.settings.label }}</dt>
+              <dd class="hero__meta-value">{{ block.settings.value }}</dd>
+            </div>
+          {%- endfor -%}
+        </dl>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="hero__photo">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'eager', alt: section.settings.image.alt | default: shop.name }}
+    {%- else -%}
+      <img src="{{ 'hero-burn-notice.jpg' | asset_url }}" alt="Burn Notice incense, lit and smoking against a dark backdrop" width="1600" height="1067" loading="eager">
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "headline_1",
+      "label": "Headline line 1",
+      "default": "Come Get"
+    },
+    {
+      "type": "text",
+      "id": "headline_2",
+      "label": "Headline line 2",
+      "default": "A Whiff"
+    },
+    {
+      "type": "textarea",
+      "id": "lede",
+      "label": "Body copy",
+      "default": "Handcrafted incense for people who actually have a nose. Real fragrance loads, names you'll remember, nothing you'd hide in a drawer."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "Falls back to the bundled Burn Notice shot."
+    },
+    {
+      "type": "text",
+      "id": "cta_primary_label",
+      "label": "Primary button label",
+      "default": "Order Now"
+    },
+    {
+      "type": "url",
+      "id": "cta_primary_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "cta_secondary_label",
+      "label": "Secondary link label",
+      "default": "Take the Smell Test"
+    },
+    {
+      "type": "url",
+      "id": "cta_secondary_link",
+      "label": "Secondary link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "meta",
+      "name": "Ticket stat",
+      "limit": 4,
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Scents" },
+        { "type": "text", "id": "value", "label": "Value", "default": "02" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero",
+      "blocks": [
+        { "type": "meta", "settings": { "label": "Scents", "value": "02" } },
+        { "type": "meta", "settings": { "label": "Ships", "value": "US" } },
+        { "type": "meta", "settings": { "label": "Burn Time", "value": "~50 Min" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

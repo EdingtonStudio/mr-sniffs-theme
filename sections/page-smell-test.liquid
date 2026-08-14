@@ -1,0 +1,74 @@
+{% comment %}
+  The Smell Test quiz. Pick the two scents in settings; questions are blocks,
+  each answer mapped to Scent A or Scent B. theme.js renders and drives it.
+{% endcomment %}
+{%- assign scent_a = section.settings.scent_a -%}
+{%- assign scent_b = section.settings.scent_b -%}
+<section class="smell-test-page" data-smell-test>
+  <script type="application/json" data-smell-test-config>
+    {
+      "label": {{ section.settings.label | json }},
+      "scents": {
+        "a": {
+          "title": {{ scent_a.title | json }},
+          "url": {{ scent_a.url | json }},
+          "notes": {{ scent_a.metafields.custom.note_pairing.value | json }},
+          "color": {{ scent_a.metafields.custom.flavor_tag_color.value | json }}
+        },
+        "b": {
+          "title": {{ scent_b.title | json }},
+          "url": {{ scent_b.url | json }},
+          "notes": {{ scent_b.metafields.custom.note_pairing.value | json }},
+          "color": {{ scent_b.metafields.custom.flavor_tag_color.value | json }}
+        }
+      },
+      "questions": [
+        {%- for block in section.blocks -%}
+          {
+            "prompt": {{ block.settings.prompt | json }},
+            "answer_a": {{ block.settings.answer_a | json }},
+            "answer_b": {{ block.settings.answer_b | json }}
+          }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ]
+    }
+  </script>
+  <noscript>
+    <div class="smell-quiz">
+      <p class="faq-answer">The Smell Test needs JavaScript. Or skip it: <a href="{{ routes.all_products_collection_url }}">get both scents</a>.</p>
+    </div>
+  </noscript>
+</section>
+
+{% schema %}
+{
+  "name": "Smell Test quiz",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Progress label", "default": "The Smell Test" },
+    { "type": "product", "id": "scent_a", "label": "Scent A (calm answers)" },
+    { "type": "product", "id": "scent_b", "label": "Scent B (bold answers)" }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        { "type": "text", "id": "prompt", "label": "Prompt" },
+        { "type": "text", "id": "answer_a", "label": "Answer for Scent A" },
+        { "type": "text", "id": "answer_b", "label": "Answer for Scent B" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Smell Test quiz",
+      "blocks": [
+        { "type": "question", "settings": { "prompt": "It's 11PM. Pick your energy.", "answer_a": "Soft landing, do not disturb", "answer_b": "Main character, no notes" } },
+        { "type": "question", "settings": { "prompt": "Your ideal room smells like", "answer_a": "Something that hugs back", "answer_b": "Something that dares you" } },
+        { "type": "question", "settings": { "prompt": "Pick a crime.", "answer_a": "Ghosting the group chat to nap", "answer_b": "Starting drama on purpose" } },
+        { "type": "question", "settings": { "prompt": "Last words before you light this incense.", "answer_a": "Finally. Peace.", "answer_b": "Let's see what happens." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

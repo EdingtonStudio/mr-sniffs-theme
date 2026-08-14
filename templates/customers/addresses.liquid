@@ -1,0 +1,11 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">Addresses</h1>
+  </header>
+  <div class="narrow-page__body">
+    {%- for address in customer.addresses -%}
+      <p style="margin-bottom: 1rem;">{{ address | format_address }}</p>
+    {%- endfor -%}
+    <p><a href="{{ routes.account_url }}">Back to account</a></p>
+  </div>
+</section>

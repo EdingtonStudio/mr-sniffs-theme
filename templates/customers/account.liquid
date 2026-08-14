@@ -1,0 +1,14 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">Your Account</h1>
+  </header>
+  <div class="narrow-page__body">
+    <p>{{ customer.email }}</p>
+    <ul class="search-results">
+      {%- for order in customer.orders -%}
+        <li><a href="{{ order.customer_url }}">Order {{ order.name }} · {{ order.total_price | money_without_trailing_zeros }}</a></li>
+      {%- endfor -%}
+    </ul>
+    <p style="margin-top: 2rem;"><a href="{{ routes.account_logout_url }}">Log out</a></p>
+  </div>
+</section>

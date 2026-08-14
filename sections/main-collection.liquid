@@ -1,0 +1,41 @@
+<section class="shop">
+  <header class="shop__header">
+    {%- if section.settings.kicker != blank -%}
+      <p class="page-kicker">{{ section.settings.kicker }}</p>
+    {%- endif -%}
+    <h1 class="page-title">
+      {%- if section.settings.title != blank -%}
+        {{ section.settings.title }}
+      {%- else -%}
+        {{ collection.title }}
+      {%- endif -%}
+    </h1>
+  </header>
+  <div class="shop__grid-wrap">
+    <div class="product-grid">
+      {%- for product in collection.products -%}
+        {% render 'product-card', card_product: product %}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Collection page",
+  "settings": [
+    {
+      "type": "text",
+      "id": "kicker",
+      "label": "Kicker",
+      "default": "The whole line"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title override",
+      "info": "Leave empty to use the collection's own title."
+    }
+  ]
+}
+{% endschema %}

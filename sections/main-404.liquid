@@ -1,0 +1,13 @@
+<section class="error-page">
+  <img src="{{ 'mascot-white.svg' | asset_url }}" alt="" aria-hidden="true" class="error-page__mascot" width="96" height="96">
+  <h1 class="error-page__headline">{{ 'general.404.title' | t }}</h1>
+  <p class="error-page__copy">{{ 'general.404.subtext' | t }}</p>
+  <a href="{{ routes.root_url }}" class="error-page__cta">{{ 'general.404.link' | t }}</a>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}

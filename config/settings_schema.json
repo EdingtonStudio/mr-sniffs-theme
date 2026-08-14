@@ -1,0 +1,67 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Mr. Sniff's",
+    "theme_version": "1.0.0",
+    "theme_author": "Edington Studio",
+    "theme_documentation_url": "https://github.com/EdingtonStudio/mr-sniffs-theme",
+    "theme_support_url": "https://github.com/EdingtonStudio/mr-sniffs-theme/issues"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_midnight",
+        "label": "Background (Midnight)",
+        "default": "#0F1214"
+      },
+      {
+        "type": "color",
+        "id": "color_paper",
+        "label": "Text (White)",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_iron",
+        "label": "Muted text (Iron)",
+        "default": "#9A9EA0"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Primary accent (Coral)",
+        "info": "Used for numbers, kickers, underlines, and hover states site-wide.",
+        "default": "#E06666"
+      },
+      {
+        "type": "color",
+        "id": "color_accent_2",
+        "label": "Secondary accent (Bon Fire brown)",
+        "default": "#9A6B3F"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon image",
+        "info": "Will be scaled down to 32 x 32px"
+      }
+    ]
+  },
+  {
+    "name": "Social",
+    "settings": [
+      {
+        "type": "url",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      }
+    ]
+  }
+]

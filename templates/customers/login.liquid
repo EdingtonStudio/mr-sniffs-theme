@@ -1,0 +1,19 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">Log In</h1>
+  </header>
+  <div class="narrow-page__body">
+    {%- form 'customer_login' -%}
+      {{ form.errors | default_errors }}
+      <label for="CustomerEmail" class="newsletter-form__label">Email</label>
+      <div class="newsletter-form__row" style="margin-bottom: 1rem;">
+        <input id="CustomerEmail" type="email" name="customer[email]" class="newsletter-form__input" autocomplete="email" required>
+      </div>
+      <label for="CustomerPassword" class="newsletter-form__label">Password</label>
+      <div class="newsletter-form__row" style="margin-bottom: 1rem;">
+        <input id="CustomerPassword" type="password" name="customer[password]" class="newsletter-form__input" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="btn-loud">Log In</button>
+    {%- endform -%}
+  </div>
+</section>

@@ -1,0 +1,55 @@
+{% comment %}
+  Numbered editorial accordion row with copy + a loud underlined link.
+  Used for "The Smell Test" on the homepage; reusable for any callout.
+{% endcomment %}
+<section class="edit-section">
+  <h2 class="edit-section__heading">
+    <button
+      type="button"
+      class="edit-section__row"
+      data-accordion-row
+      aria-expanded="{{ section.settings.open_by_default }}"
+      aria-controls="Panel-{{ section.id }}"
+    >
+      <span class="edit-section__num">{{ section.settings.number }}</span>
+      <span class="edit-section__label">{{ section.settings.heading }}</span>
+      {%- if section.settings.note != blank -%}
+        <span class="edit-section__note">{{ section.settings.note }}</span>
+      {%- endif -%}
+      <span class="edit-section__toggle" aria-hidden="true"></span>
+    </button>
+  </h2>
+  <div id="Panel-{{ section.id }}" class="edit-section__panel{% if section.settings.open_by_default %} is-open{% endif %}">
+    <div class="edit-section__clip">
+      <div class="edit-section__inner">
+        <div class="home-smell-test">
+          <p class="home-smell-test__copy">{{ section.settings.copy }}</p>
+          {%- if section.settings.link_label != blank -%}
+            <a href="{{ section.settings.link }}" class="home-smell-test__cta">{{ section.settings.link_label }} →</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Callout row",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Row number", "default": "02/" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "The Smell Test" },
+    { "type": "text", "id": "note", "label": "Right-side note", "default": "4 Questions" },
+    {
+      "type": "textarea",
+      "id": "copy",
+      "label": "Copy",
+      "default": "Still not sure which one's yours? Four questions, no accounts, no email gate. One winner for your nose."
+    },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Take The Smell Test" },
+    { "type": "url", "id": "link", "label": "Link" },
+    { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+  ],
+  "presets": [{ "name": "Callout row" }]
+}
+{% endschema %}

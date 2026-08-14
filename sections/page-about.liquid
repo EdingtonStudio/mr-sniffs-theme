@@ -1,0 +1,172 @@
+{% comment %}
+  The About page as one section with blocks for pillars and process steps.
+  Photos are optional image pickers; empty ones render the crossed
+  placeholder frame from the design.
+{% endcomment %}
+{%- capture ph_cross -%}<span class="about__ph-cross" aria-hidden="true"></span>{%- endcapture -%}
+
+<article class="about">
+  <header class="about__hero">
+    <div>
+      <p class="page-kicker">{{ section.settings.kicker }}</p>
+      <h1 class="about__headline">{{ section.settings.headline }}</h1>
+      <p class="about__intro">{{ section.settings.intro }}</p>
+    </div>
+    <figure class="about__ph about__ph--tall">
+      {%- if section.settings.photo_hero != blank -%}
+        <img class="about__ph-img" src="{{ section.settings.photo_hero | image_url: width: 1000 }}" alt="{{ section.settings.photo_hero.alt | escape }}" width="1000" height="1250" loading="lazy">
+      {%- else -%}
+        {{ ph_cross }}
+        <figcaption class="about__ph-label">Photo: Founder / Studio Portrait</figcaption>
+      {%- endif -%}
+    </figure>
+  </header>
+
+  <section class="about__section">
+    <header class="about__section-head">
+      <span class="about__section-num">01/</span>
+      <h2 class="about__section-title">{{ section.settings.pillars_title }}</h2>
+    </header>
+    <div class="about__pillars">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'pillar' -%}
+          <div class="about__pillar" {{ block.shopify_attributes }}>
+            <h3 class="about__pillar-title">{{ block.settings.title }}</h3>
+            <p class="about__pillar-body">{{ block.settings.body }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </section>
+
+  <section class="about__section">
+    <header class="about__section-head">
+      <span class="about__section-num">02/</span>
+      <h2 class="about__section-title">{{ section.settings.mission_title }}</h2>
+    </header>
+    <div class="about__mission">
+      <div>
+        <p class="about__block-label">Mission</p>
+        <p class="about__block-body">{{ section.settings.mission }}</p>
+      </div>
+      <div>
+        <p class="about__block-label">Vision</p>
+        <p class="about__block-body">{{ section.settings.vision }}</p>
+      </div>
+      <figure class="about__ph about__ph--square">
+        {%- if section.settings.photo_mission != blank -%}
+          <img class="about__ph-img" src="{{ section.settings.photo_mission | image_url: width: 900 }}" alt="{{ section.settings.photo_mission.alt | escape }}" width="900" height="900" loading="lazy">
+        {%- else -%}
+          {{ ph_cross }}
+          <figcaption class="about__ph-label">Photo: Product In Situ</figcaption>
+        {%- endif -%}
+      </figure>
+    </div>
+  </section>
+
+  <section class="about__section">
+    <header class="about__section-head">
+      <span class="about__section-num">03/</span>
+      <h2 class="about__section-title">{{ section.settings.process_title }}</h2>
+    </header>
+    <div class="about__process">
+      <figure class="about__ph about__ph--wide">
+        {%- if section.settings.photo_process != blank -%}
+          <img class="about__ph-img" src="{{ section.settings.photo_process | image_url: width: 1200 }}" alt="{{ section.settings.photo_process.alt | escape }}" width="1200" height="750" loading="lazy">
+        {%- else -%}
+          {{ ph_cross }}
+          <figcaption class="about__ph-label">Photo: Hands Rolling Incense</figcaption>
+        {%- endif -%}
+      </figure>
+      <ol class="about__steps">
+        {%- assign step_index = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            {%- assign step_index = step_index | plus: 1 -%}
+            <li class="about__step" {{ block.shopify_attributes }}>
+              <span class="about__step-num">{{ step_index | prepend: '0' | slice: -2, 2 }}</span>
+              <div>
+                <h3 class="about__step-title">{{ block.settings.title }}</h3>
+                <p class="about__step-body">{{ block.settings.body }}</p>
+              </div>
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ol>
+    </div>
+  </section>
+
+  <section class="about__section">
+    <header class="about__section-head">
+      <span class="about__section-num">04/</span>
+      <h2 class="about__section-title">{{ section.settings.closer_title }}</h2>
+    </header>
+    <div class="about__closer">
+      <p class="about__closer-copy">{{ section.settings.closer_copy }}</p>
+      <div class="about__closer-actions">
+        {%- if section.settings.closer_btn_label != blank -%}
+          <a href="{{ section.settings.closer_btn_link }}" class="about__closer-btn">{{ section.settings.closer_btn_label }}</a>
+        {%- endif -%}
+        {%- if section.settings.closer_link_label != blank -%}
+          <a href="{{ section.settings.closer_link }}" class="about__closer-link">{{ section.settings.closer_link_label }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+</article>
+
+{% schema %}
+{
+  "name": "About page",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Kicker", "default": "About Mr. Sniff's" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "We Make Incense For People Who Have A Nose." },
+    { "type": "textarea", "id": "intro", "label": "Intro", "default": "Not the kind you light for a spa day. The kind that fills a room, starts a conversation, and makes your weird neighbor ask what you're burning." },
+    { "type": "image_picker", "id": "photo_hero", "label": "Hero photo" },
+    { "type": "text", "id": "pillars_title", "label": "Section 01 title", "default": "What We're About" },
+    { "type": "text", "id": "mission_title", "label": "Section 02 title", "default": "Why We're Here" },
+    { "type": "textarea", "id": "mission", "label": "Mission", "default": "We're here to prove that incense doesn't have to be precious. Great fragrance should be bold, irreverent, and worth talking about, not something you hide in a drawer." },
+    { "type": "textarea", "id": "vision", "label": "Vision", "default": "We're building toward something simple: a world where Mr. Sniff's is the first name people reach for when they want a scent with an actual point of view." },
+    { "type": "image_picker", "id": "photo_mission", "label": "Section 02 photo" },
+    { "type": "text", "id": "process_title", "label": "Section 03 title", "default": "How It's Made" },
+    { "type": "image_picker", "id": "photo_process", "label": "Section 03 photo" },
+    { "type": "text", "id": "closer_title", "label": "Section 04 title", "default": "Smell For Yourself" },
+    { "type": "textarea", "id": "closer_copy", "label": "Closer copy", "default": "Handcrafted incense, real fragrance loads, names you'll actually remember. Life's too short to burn something forgettable." },
+    { "type": "text", "id": "closer_btn_label", "label": "Button label", "default": "Shop The Lineup" },
+    { "type": "url", "id": "closer_btn_link", "label": "Button link" },
+    { "type": "text", "id": "closer_link_label", "label": "Secondary link label", "default": "Take The Smell Test" },
+    { "type": "url", "id": "closer_link", "label": "Secondary link" }
+  ],
+  "blocks": [
+    {
+      "type": "pillar",
+      "name": "Pillar",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Process step",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title" },
+        { "type": "textarea", "id": "body", "label": "Body" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About page",
+      "blocks": [
+        { "type": "pillar", "settings": { "title": "Bold, Not Precious", "body": "Great fragrance should be bold, irreverent, and worth talking about, not something you hide in a drawer or save for a spa day." } },
+        { "type": "pillar", "settings": { "title": "Handcrafted, For Real", "body": "Real fragrance loads on a hand-rolled stick. No shortcuts, no synthetic filler dressed up as \"essential.\"" } },
+        { "type": "pillar", "settings": { "title": "Just Wood, No Nonsense", "body": "We burn wood: palo santo, agarwood. That's it. No extra nonsense, nothing in the stick that doesn't belong there." } },
+        { "type": "step", "settings": { "title": "Built From A Note Pairing", "body": "Each scent starts as a deliberate pairing of notes, not a mystery blend." } },
+        { "type": "step", "settings": { "title": "Hand-Rolled Sticks", "body": "Rolled by hand with a real fragrance load, so the room actually notices." } },
+        { "type": "step", "settings": { "title": "~50 Minutes A Burn", "body": "Long enough to matter, short enough that you won't forget it's lit." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

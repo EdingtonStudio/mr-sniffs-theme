@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_midnight }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon != blank -%}
+      <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
+    {%- endif -%}
+
+    <title>
+      {{ page_title }}
+      {%- if current_tags %} &ndash; tagged "{{ current_tags | join: ', ' }}"{% endif -%}
+      {%- if current_page != 1 %} &ndash; Page {{ current_page }}{% endif -%}
+      {%- unless page_title contains shop.name %} &middot; {{ shop.name }}{% endunless -%}
+    </title>
+
+    {% if page_description %}
+      <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}
+
+    <!-- Big Shoulders = loud (headlines/CTAs), Space Mono = utility (labels), Inter = body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@800;900&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    {% # Global design tokens, overridable from theme settings %}
+    <style>
+      :root {
+        --color-midnight: {{ settings.color_midnight | default: '#0F1214' }};
+        --color-iron: {{ settings.color_iron | default: '#9A9EA0' }};
+        --color-white: {{ settings.color_paper | default: '#FFFFFF' }};
+        --color-tag-burn-notice: {{ settings.color_accent | default: '#E06666' }};
+        --color-tag-bon-fire: {{ settings.color_accent_2 | default: '#9A6B3F' }};
+      }
+    </style>
+
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    <script src="{{ 'theme.js' | asset_url }}" defer></script>
+
+    {{ content_for_header }}
+  </head>
+
+  <body>
+    {% section 'header' %}
+
+    <main id="MainContent" role="main">
+      {{ content_for_layout }}
+    </main>
+
+    {% section 'footer' %}
+    {% section 'cart-drawer' %}
+  </body>
+</html>

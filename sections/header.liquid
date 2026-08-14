@@ -1,0 +1,73 @@
+<nav class="site-nav">
+  <div class="site-nav__inner">
+    <a href="{{ routes.root_url }}" class="site-nav__logo" aria-label="{{ shop.name }} home">
+      {%- if section.settings.logo != blank -%}
+        <img src="{{ section.settings.logo | image_url: height: 104 }}" alt="{{ shop.name }}" width="{{ 52 | times: section.settings.logo.aspect_ratio | round }}" height="52" loading="eager">
+      {%- else -%}
+        <img src="{{ 'logo-white.svg' | asset_url }}" alt="{{ shop.name }}" width="177" height="52" loading="eager">
+      {%- endif -%}
+    </a>
+
+    <div class="site-nav__right">
+      <div class="site-nav__links">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}">{{ link.title }}</a>
+        {%- endfor -%}
+      </div>
+
+      <button
+        class="site-nav__cart"
+        type="button"
+        aria-label="Open cart ({{ cart.item_count }} {% if cart.item_count == 1 %}item{% else %}items{% endif %})"
+        data-cart-open
+      >
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.5 7.5h15L18.3 20H5.7L4.5 7.5Z"/>
+          <path d="M9 10V5.5a3 3 0 0 1 6 0V10" stroke-linecap="round"/>
+        </svg>
+        <span class="site-nav__count" data-cart-count>{% if cart.item_count > 0 %}{{ cart.item_count }}{% endif %}</span>
+      </button>
+
+      <button
+        class="site-nav__menu-btn"
+        type="button"
+        aria-label="Open menu"
+        aria-expanded="false"
+        data-menu-toggle
+      >
+        <svg class="icon-burger" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M3.5 6.5h17"/><path d="M3.5 12h17"/><path d="M3.5 17.5h17"/>
+        </svg>
+        <svg class="icon-close" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <path d="M5 5l14 14"/><path d="M19 5L5 19"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="site-nav__menu" data-menu hidden>
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}" class="site-nav__menu-link">{{ link.title }}</a>
+    {%- endfor -%}
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo",
+      "info": "White script wordmark. Falls back to the bundled Mr. Sniff's logo."
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,14 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">Order {{ order.name }}</h1>
+  </header>
+  <div class="narrow-page__body">
+    <p>{{ order.created_at | date: '%B %d, %Y' }}</p>
+    <ul class="search-results">
+      {%- for line_item in order.line_items -%}
+        <li><a href="{{ line_item.product.url }}">{{ line_item.title }} × {{ line_item.quantity }} · {{ line_item.final_line_price | money_without_trailing_zeros }}</a></li>
+      {%- endfor -%}
+    </ul>
+    <p style="margin-top: 2rem;">Total: {{ order.total_price | money_without_trailing_zeros }}</p>
+  </div>
+</section>

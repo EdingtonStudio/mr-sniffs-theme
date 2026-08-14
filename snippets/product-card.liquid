@@ -1,0 +1,42 @@
+{% comment %}
+  Editorial product card. Accepts: card_product (product object)
+  Scent accent + note pairing come from custom.* metafields.
+{% endcomment %}
+{%- assign accent = card_product.metafields.custom.flavor_tag_color.value -%}
+<a
+  href="{{ card_product.url }}"
+  class="product-card"
+  {% if accent %}style="--card-accent: {{ accent }}"{% endif %}
+>
+  <div class="product-card__media">
+    <div class="product-card__frame">
+      {%- if card_product.featured_image -%}
+        <img
+          class="product-card__img"
+          src="{{ card_product.featured_image | image_url: width: 900 }}"
+          srcset="{{ card_product.featured_image | image_url: width: 450 }} 450w, {{ card_product.featured_image | image_url: width: 900 }} 900w"
+          sizes="(max-width: 640px) 100vw, (max-width: 900px) 50vw, 33vw"
+          alt="{{ card_product.featured_image.alt | default: card_product.title | escape }}"
+          width="900"
+          height="{{ 900 | divided_by: card_product.featured_image.aspect_ratio | round }}"
+          loading="lazy"
+        >
+      {%- else -%}
+        <div class="product-card__fallback">
+          <img src="{{ 'mascot-white.svg' | asset_url }}" alt="" aria-hidden="true" width="200" height="200" loading="lazy">
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+
+  <div class="product-card__meta">
+    <div class="product-card__info">
+      <h3 class="product-card__name">{{ card_product.title }}</h3>
+      {%- assign notes = card_product.metafields.custom.note_pairing.value -%}
+      {%- if notes -%}
+        <p class="product-card__notes">{{ notes }}</p>
+      {%- endif -%}
+    </div>
+    <span class="product-card__price">{{ card_product.price | money_without_trailing_zeros }}</span>
+  </div>
+</a>

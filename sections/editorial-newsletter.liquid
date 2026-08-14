@@ -1,0 +1,43 @@
+{% comment %}
+  Numbered editorial accordion row with the newsletter signup.
+{% endcomment %}
+<section class="edit-section edit-section--last">
+  <h2 class="edit-section__heading">
+    <button
+      type="button"
+      class="edit-section__row"
+      data-accordion-row
+      aria-expanded="{{ section.settings.open_by_default }}"
+      aria-controls="Panel-{{ section.id }}"
+    >
+      <span class="edit-section__num">{{ section.settings.number }}</span>
+      <span class="edit-section__label">{{ section.settings.heading }}</span>
+      <span class="edit-section__note">{{ section.settings.note }}</span>
+      <span class="edit-section__toggle" aria-hidden="true"></span>
+    </button>
+  </h2>
+  <div id="Panel-{{ section.id }}" class="edit-section__panel{% if section.settings.open_by_default %} is-open{% endif %}">
+    <div class="edit-section__clip">
+      <div class="edit-section__inner">
+        <div class="home-newsletter">
+          <p class="home-newsletter__copy">{{ section.settings.copy }}</p>
+          {% render 'newsletter-form' %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter row",
+  "settings": [
+    { "type": "text", "id": "number", "label": "Row number", "default": "03/" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Stay In The Loop" },
+    { "type": "text", "id": "note", "label": "Right-side note", "default": "Newsletter" },
+    { "type": "text", "id": "copy", "label": "Copy", "default": "Don't miss the next scent." },
+    { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": false }
+  ],
+  "presets": [{ "name": "Newsletter row" }]
+}
+{% endschema %}

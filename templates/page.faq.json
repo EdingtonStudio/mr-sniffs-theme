@@ -1,0 +1,17 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-faq",
+      "blocks": {
+        "q1": { "type": "faq", "settings": { "question": "What are these actually made of?", "answer": "Real fragrance loads on a hand-rolled stick. No shortcuts, no synthetic filler dressed up as \"essential.\" Each scent is built from a note pairing, not a mystery blend." } },
+        "q2": { "type": "faq", "settings": { "question": "How long does one stick burn?", "answer": "About 50 minutes per stick, give or take your room's airflow. Long enough to matter, short enough that you won't forget it's lit." } },
+        "q3": { "type": "faq", "settings": { "question": "I can only pick one. Which scent do I get?", "answer": "Take the Smell Test: four questions, no accounts, no email gate. Or just get both with the Duo Bundle and stop torturing yourself." } },
+        "q4": { "type": "faq", "settings": { "question": "Is it safe to burn indoors?", "answer": "Yes, with the same common sense you'd use for any open flame: burn on a heatproof holder, keep it away from anything flammable, don't leave it unattended, and keep it clear of kids and pets." } },
+        "q5": { "type": "faq", "settings": { "question": "Where do you ship?", "answer": "Currently the U.S. Rates and delivery windows are calculated at checkout before you pay for anything." } },
+        "q6": { "type": "faq", "settings": { "question": "Can I return it if it's not for me?", "answer": "See our Shipping & Returns policy in the footer for the full breakdown. We're not going to bury it in fine print here." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4", "q5", "q6"]
+    }
+  },
+  "order": ["main"]
+}

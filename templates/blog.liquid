@@ -1,0 +1,10 @@
+<section class="narrow-page">
+  <header class="narrow-page__header">
+    <h1 class="narrow-page__title">{{ blog.title }}</h1>
+  </header>
+  <ul class="search-results">
+    {%- for article in blog.articles -%}
+      <li><a href="{{ article.url }}">{{ article.title }}</a></li>
+    {%- endfor -%}
+  </ul>
+</section>

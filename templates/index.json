@@ -1,0 +1,54 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "blocks": {
+        "meta-scents": { "type": "meta", "settings": { "label": "Scents", "value": "02" } },
+        "meta-ships": { "type": "meta", "settings": { "label": "Ships", "value": "US" } },
+        "meta-burn": { "type": "meta", "settings": { "label": "Burn Time", "value": "~50 Min" } }
+      },
+      "block_order": ["meta-scents", "meta-ships", "meta-burn"],
+      "settings": {
+        "headline_1": "Come Get",
+        "headline_2": "A Whiff",
+        "lede": "Handcrafted incense for people who actually have a nose. Real fragrance loads, names you'll remember, nothing you'd hide in a drawer.",
+        "cta_primary_label": "Order Now",
+        "cta_primary_link": "shopify://collections/all",
+        "cta_secondary_label": "Take the Smell Test",
+        "cta_secondary_link": "/pages/smell-test"
+      }
+    },
+    "lineup": {
+      "type": "editorial-lineup",
+      "settings": {
+        "number": "01/",
+        "heading": "The Lineup",
+        "max_products": 6,
+        "open_by_default": true
+      }
+    },
+    "smell-test": {
+      "type": "editorial-callout",
+      "settings": {
+        "number": "02/",
+        "heading": "The Smell Test",
+        "note": "4 Questions",
+        "copy": "Still not sure which one's yours? Four questions, no accounts, no email gate. One winner for your nose.",
+        "link_label": "Take The Smell Test",
+        "link": "/pages/smell-test",
+        "open_by_default": false
+      }
+    },
+    "newsletter": {
+      "type": "editorial-newsletter",
+      "settings": {
+        "number": "03/",
+        "heading": "Stay In The Loop",
+        "note": "Newsletter",
+        "copy": "Don't miss the next scent.",
+        "open_by_default": false
+      }
+    }
+  },
+  "order": ["hero", "lineup", "smell-test", "newsletter"]
+}

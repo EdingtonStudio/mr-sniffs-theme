@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "main": {
+      "type": "page-smell-test",
+      "blocks": {
+        "q1": { "type": "question", "settings": { "prompt": "It's 11PM. Pick your energy.", "answer_a": "Soft landing, do not disturb", "answer_b": "Main character, no notes" } },
+        "q2": { "type": "question", "settings": { "prompt": "Your ideal room smells like", "answer_a": "Something that hugs back", "answer_b": "Something that dares you" } },
+        "q3": { "type": "question", "settings": { "prompt": "Pick a crime.", "answer_a": "Ghosting the group chat to nap", "answer_b": "Starting drama on purpose" } },
+        "q4": { "type": "question", "settings": { "prompt": "Last words before you light this incense.", "answer_a": "Finally. Peace.", "answer_b": "Let's see what happens." } }
+      },
+      "block_order": ["q1", "q2", "q3", "q4"]
+    }
+  },
+  "order": ["main"]
+}
