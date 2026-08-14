@@ -1,17 +1,48 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
       "blocks": {
-        "meta-scents": { "type": "meta", "settings": { "label": "Scents", "value": "02" } },
-        "meta-ships": { "type": "meta", "settings": { "label": "Ships", "value": "US" } },
-        "meta-burn": { "type": "meta", "settings": { "label": "Burn Time", "value": "~50 Min" } }
+        "meta-scents": {
+          "type": "meta",
+          "settings": {
+            "label": "Scents",
+            "value": "02"
+          }
+        },
+        "meta-ships": {
+          "type": "meta",
+          "settings": {
+            "label": "Ships",
+            "value": "US"
+          }
+        },
+        "meta-burn": {
+          "type": "meta",
+          "settings": {
+            "label": "Burn Time",
+            "value": "~50 Min"
+          }
+        }
       },
-      "block_order": ["meta-scents", "meta-ships", "meta-burn"],
+      "block_order": [
+        "meta-scents",
+        "meta-ships",
+        "meta-burn"
+      ],
       "settings": {
         "headline_1": "Come Get",
         "headline_2": "A Whiff",
-        "lede": "Handcrafted incense for people who actually have a nose. Real fragrance loads, names you'll remember, nothing you'd hide in a drawer.",
+        "lede": "Handcrafted incense for people who have a nose. Real fragrance loads, real wood, nothing you'd hide in a drawer.",
         "cta_primary_label": "Order Now",
         "cta_primary_link": "shopify://collections/all",
         "cta_secondary_label": "Take the Smell Test",
@@ -23,6 +54,7 @@
       "settings": {
         "number": "01/",
         "heading": "The Lineup",
+        "collection": "",
         "max_products": 6,
         "open_by_default": true
       }
@@ -50,5 +82,10 @@
       }
     }
   },
-  "order": ["hero", "lineup", "smell-test", "newsletter"]
+  "order": [
+    "hero",
+    "lineup",
+    "smell-test",
+    "newsletter"
+  ]
 }
