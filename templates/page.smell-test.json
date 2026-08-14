@@ -8,7 +8,12 @@
         "q3": { "type": "question", "settings": { "prompt": "Pick a crime.", "answer_a": "Ghosting the group chat to nap", "answer_b": "Starting drama on purpose" } },
         "q4": { "type": "question", "settings": { "prompt": "Last words before you light this incense.", "answer_a": "Finally. Peace.", "answer_b": "Let's see what happens." } }
       },
-      "block_order": ["q1", "q2", "q3", "q4"]
+      "block_order": ["q1", "q2", "q3", "q4"],
+      "settings": {
+        "label": "The Smell Test",
+        "scent_a": "bonfire-agarwood",
+        "scent_b": "burn-notice-palo-santo"
+      }
     }
   },
   "order": ["main"]

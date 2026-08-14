@@ -5,6 +5,31 @@
     "color_iron": "#9A9EA0",
     "color_accent": "#E06666",
     "color_accent_2": "#9A6B3F",
-    "social_instagram": "https://instagram.com/mrsniffs"
+    "social_instagram": "https://instagram.com/mrsniffs",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "menu": "main-menu"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "tagline": "Handcrafted incense for people who actually have a nose.",
+          "menu_shop": "main-menu",
+          "menu_support": "footer",
+          "sign_off": "We just make scents."
+        }
+      },
+      "cart-drawer": {
+        "type": "cart-drawer",
+        "settings": {
+          "upsell_product": "duo-bundle",
+          "upsell_copy": "Not sure? The Duo Bundle gets you both scents. Stop overthinking it.",
+          "upsell_button": "Add the Duo Bundle"
+        }
+      }
+    }
   }
 }
