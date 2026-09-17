@@ -3,7 +3,7 @@
     "main": {
       "type": "main-collection",
       "settings": {
-        "kicker": "",
+        "kicker": "Something to put the stick in",
         "title": ""
       }
     }
