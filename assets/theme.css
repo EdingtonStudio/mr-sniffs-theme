@@ -546,6 +546,21 @@ button { font: inherit; }
 }
 @media (max-width: 640px) {
   .product-grid { grid-template-columns: 1fr; }
+  /* Homepage rows swap the stack for a swipe carousel on phones */
+  .product-grid--carousel {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 1rem;
+    scrollbar-width: none;
+    padding-bottom: 0.5rem;
+  }
+  .product-grid--carousel::-webkit-scrollbar { display: none; }
+  .product-grid--carousel .product-card {
+    flex: 0 0 76%;
+    scroll-snap-align: start;
+  }
 }
 
 .product-card {

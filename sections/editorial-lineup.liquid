@@ -39,7 +39,7 @@
   <div id="Panel-{{ section.id }}" class="edit-section__panel{% if section.settings.open_by_default %} is-open{% endif %}">
     <div class="edit-section__clip">
       <div class="edit-section__inner">
-        <div class="product-grid">
+        <div class="product-grid product-grid--carousel">
           {%- liquid
             assign shown = 0
             for product in products

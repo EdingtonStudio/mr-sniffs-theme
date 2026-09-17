@@ -52,7 +52,7 @@
     "holders": {
       "type": "editorial-lineup",
       "settings": {
-        "number": "01/",
+        "number": "02/",
         "heading": "Somewhere To Stick It",
         "collection": "incense-holders",
         "max_products": 3,
@@ -62,7 +62,7 @@
     "lineup": {
       "type": "editorial-lineup",
       "settings": {
-        "number": "02/",
+        "number": "01/",
         "heading": "The Lineup",
         "collection": "",
         "max_products": 6,
@@ -95,8 +95,8 @@
   },
   "order": [
     "hero",
-    "holders",
     "lineup",
+    "holders",
     "smell-test",
     "newsletter"
   ]
