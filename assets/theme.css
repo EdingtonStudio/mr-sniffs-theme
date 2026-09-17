@@ -621,6 +621,34 @@ button { font: inherit; }
   white-space: nowrap;
   padding-top: 0.2rem;
 }
+/* Sold-out sticker pinned to the image frame, same energy as the flavor tags */
+.product-card__badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1;
+  padding: 6px 10px;
+  font-family: var(--font-mono);
+  font-weight: var(--weight-mono-bold);
+  font-size: 0.72rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--color-white);
+  background: var(--color-midnight);
+  border: 1px solid var(--color-tag-burn-notice);
+  border-radius: var(--radius-sticker);
+  transform: rotate(-2.5deg);
+  pointer-events: none;
+}
+
+/* PDP back-in-stock capture under the sold-out button */
+.pdp__notify {
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-hairline);
+  width: 100%;
+  max-width: 26rem;
+}
 
 /* ==========================================================================
    FLAVOR TAG (sticker)

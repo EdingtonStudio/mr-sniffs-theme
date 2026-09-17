@@ -1,5 +1,6 @@
 {% comment %}
   Numbered editorial accordion row containing the product lineup grid.
+  exclude_type leaves a product type out of the row (empty = show everything).
 {% endcomment %}
 {%- liquid
   if section.settings.collection != blank
@@ -7,7 +8,17 @@
   else
     assign products = collections.all.products
   endif
-  assign count = products.size | at_most: section.settings.max_products
+  assign exclude_type = section.settings.exclude_type
+  assign count = 0
+  for product in products
+    if exclude_type != blank and product.type == exclude_type
+      continue
+    endif
+    assign count = count | plus: 1
+    if count >= section.settings.max_products
+      break
+    endif
+  endfor
   assign count_label = count | prepend: '0' | slice: -2, 2
 -%}
 <section class="edit-section">
@@ -29,9 +40,19 @@
     <div class="edit-section__clip">
       <div class="edit-section__inner">
         <div class="product-grid">
-          {%- for product in products limit: section.settings.max_products -%}
-            {% render 'product-card', card_product: product %}
-          {%- endfor -%}
+          {%- liquid
+            assign shown = 0
+            for product in products
+              if exclude_type != blank and product.type == exclude_type
+                continue
+              endif
+              assign shown = shown | plus: 1
+              if shown > section.settings.max_products
+                break
+              endif
+              render 'product-card', card_product: product
+            endfor
+          -%}
         </div>
       </div>
     </div>
@@ -51,6 +72,12 @@
       "info": "Leave empty to show all products. Order products via the collection's manual sort."
     },
     { "type": "range", "id": "max_products", "label": "Max products", "min": 3, "max": 12, "step": 1, "default": 6 },
+    {
+      "type": "text",
+      "id": "exclude_type",
+      "label": "Exclude product type",
+      "info": "Products of this type are left out of the row. Leave empty to show everything."
+    },
     { "type": "checkbox", "id": "open_by_default", "label": "Open by default", "default": true }
   ],
   "presets": [{ "name": "Lineup row" }]

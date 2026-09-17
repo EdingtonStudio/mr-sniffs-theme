@@ -27,6 +27,9 @@
         </div>
       {%- endif -%}
     </div>
+    {%- unless card_product.available -%}
+      <span class="product-card__badge">Sold Out</span>
+    {%- endunless -%}
   </div>
 
   <div class="product-card__meta">

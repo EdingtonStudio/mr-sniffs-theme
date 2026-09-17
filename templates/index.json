@@ -49,20 +49,31 @@
         "cta_secondary_link": "/pages/smell-test"
       }
     },
-    "lineup": {
+    "holders": {
       "type": "editorial-lineup",
       "settings": {
         "number": "01/",
+        "heading": "Somewhere To Stick It",
+        "collection": "incense-holders",
+        "max_products": 3,
+        "open_by_default": true
+      }
+    },
+    "lineup": {
+      "type": "editorial-lineup",
+      "settings": {
+        "number": "02/",
         "heading": "The Lineup",
         "collection": "",
         "max_products": 6,
+        "exclude_type": "Incense Holder",
         "open_by_default": true
       }
     },
     "smell-test": {
       "type": "editorial-callout",
       "settings": {
-        "number": "02/",
+        "number": "03/",
         "heading": "The Smell Test",
         "note": "4 Questions",
         "copy": "Still not sure which one's yours? Four questions, no accounts, no email gate. One winner for your nose.",
@@ -74,7 +85,7 @@
     "newsletter": {
       "type": "editorial-newsletter",
       "settings": {
-        "number": "03/",
+        "number": "04/",
         "heading": "Stay In The Loop",
         "note": "Newsletter",
         "copy": "Don't miss the next scent.",
@@ -84,6 +95,7 @@
   },
   "order": [
     "hero",
+    "holders",
     "lineup",
     "smell-test",
     "newsletter"

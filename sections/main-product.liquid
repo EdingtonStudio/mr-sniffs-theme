@@ -66,6 +66,39 @@
           <button type="button" class="btn-loud btn-loud--disabled pdp__cta" disabled>{{ 'products.product.sold_out' | t }}</button>
         {%- endif -%}
       {%- endform -%}
+
+      {%- unless product.selected_or_first_available_variant.available -%}
+        {% comment %}
+          Back-in-stock capture: stores the address as a customer tagged
+          back-in-stock-{handle} for later segmentation.
+        {% endcomment %}
+        <div class="pdp__notify">
+          {%- form 'customer', class: 'newsletter-form pdp__notify-form' -%}
+            {%- if form.posted_successfully? -%}
+              <p class="newsletter-form__confirm">You're on the list. We'll say it back in stock before we say it anywhere else.</p>
+            {%- else -%}
+              <input type="hidden" name="contact[tags]" value="back-in-stock-{{ product.handle }}">
+              <label for="NotifyEmail-{{ section.id }}" class="newsletter-form__label">Notify me when it's back</label>
+              <div class="newsletter-form__row">
+                <input
+                  id="NotifyEmail-{{ section.id }}"
+                  type="email"
+                  name="contact[email]"
+                  class="newsletter-form__input"
+                  value="{{ form.email }}"
+                  required
+                  placeholder="your@email.com"
+                  autocomplete="email"
+                >
+                <button type="submit" class="newsletter-form__submit">Notify Me</button>
+              </div>
+              {%- if form.errors -%}
+                <p class="newsletter-form__error">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>
+              {%- endif -%}
+            {%- endif -%}
+          {%- endform -%}
+        </div>
+      {%- endunless -%}
     </div>
   </div>
 
