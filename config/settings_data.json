@@ -14,6 +14,7 @@
     "color_iron": "#9A9EA0",
     "color_accent": "#E06666",
     "color_accent_2": "#EB3618",
+    "favicon": "shopify://shop_images/MrSniff-Favicon.png",
     "social_instagram": "https://instagram.com/mrsniffs",
     "sections": {
       "header": {
@@ -34,6 +35,7 @@
       "cart-drawer": {
         "type": "cart-drawer",
         "settings": {
+          "empty_link": "",
           "upsell_product": "duo-bundle",
           "upsell_copy": "Not sure? The Duo Bundle gets you both scents. Stop overthinking it.",
           "upsell_button": "Add the Duo Bundle"

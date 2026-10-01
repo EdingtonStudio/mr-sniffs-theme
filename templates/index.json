@@ -32,12 +32,20 @@
             "label": "Burn Time",
             "value": "~50 Min"
           }
+        },
+        "meta_3jnnaj": {
+          "type": "meta",
+          "settings": {
+            "label": "Scents",
+            "value": "02"
+          }
         }
       },
       "block_order": [
         "meta-scents",
         "meta-ships",
-        "meta-burn"
+        "meta-burn",
+        "meta_3jnnaj"
       ],
       "settings": {
         "headline_1": "Come Get",
@@ -49,16 +57,6 @@
         "cta_secondary_link": "/pages/smell-test"
       }
     },
-    "holders": {
-      "type": "editorial-lineup",
-      "settings": {
-        "number": "02/",
-        "heading": "Somewhere To Stick It",
-        "collection": "incense-holders",
-        "max_products": 3,
-        "open_by_default": true
-      }
-    },
     "lineup": {
       "type": "editorial-lineup",
       "settings": {
@@ -67,6 +65,17 @@
         "collection": "",
         "max_products": 6,
         "exclude_type": "Incense Holder",
+        "open_by_default": true
+      }
+    },
+    "holders": {
+      "type": "editorial-lineup",
+      "settings": {
+        "number": "02/",
+        "heading": "Somewhere To Stick It",
+        "collection": "incense-holders",
+        "max_products": 3,
+        "exclude_type": "",
         "open_by_default": true
       }
     },
