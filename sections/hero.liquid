@@ -39,7 +39,7 @@
     {%- if section.settings.image != blank -%}
       {{ section.settings.image | image_url: width: 1600 | image_tag: loading: 'eager', alt: section.settings.image.alt | default: shop.name }}
     {%- else -%}
-      <img src="{{ 'hero-burn-notice.jpg' | asset_url }}" alt="Burn Notice incense, lit and smoking against a dark backdrop" width="1600" height="1067" loading="eager">
+      <img src="{{ 'hero-default.jpg' | asset_url }}" alt="Yoga Studio incense box with smoke on a dark concrete floor" width="1200" height="1800" loading="eager">
     {%- endif -%}
   </div>
 </section>
@@ -70,7 +70,7 @@
       "type": "image_picker",
       "id": "image",
       "label": "Photo",
-      "info": "Falls back to the bundled Burn Notice shot."
+      "info": "Falls back to the bundled Yoga Studio shot."
     },
     {
       "type": "text",

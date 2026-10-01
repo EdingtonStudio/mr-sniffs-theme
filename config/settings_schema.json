@@ -38,8 +38,8 @@
       {
         "type": "color",
         "id": "color_accent_2",
-        "label": "Secondary accent (Bon Fire brown)",
-        "default": "#9A6B3F"
+        "label": "Secondary accent (Bonfire red-orange)",
+        "default": "#EB3618"
       }
     ]
   },

@@ -1,6 +1,7 @@
 {% comment %}
   Numbered editorial accordion row containing the product lineup grid.
   exclude_type leaves a product type out of the row (empty = show everything).
+  Products tagged "bundle" render after the singles.
 {% endcomment %}
 {%- liquid
   if section.settings.collection != blank
@@ -41,16 +42,29 @@
       <div class="edit-section__inner">
         <div class="product-grid product-grid--carousel">
           {%- liquid
+            # Two passes: singles first, then bundles, so the Duo always sits at the end of the row.
             assign shown = 0
-            for product in products
-              if exclude_type != blank and product.type == exclude_type
-                continue
-              endif
-              assign shown = shown | plus: 1
-              if shown > section.settings.max_products
-                break
-              endif
-              render 'product-card', card_product: product
+            for pass in (1..2)
+              for product in products
+                if exclude_type != blank and product.type == exclude_type
+                  continue
+                endif
+                assign is_bundle = false
+                if product.tags contains 'bundle'
+                  assign is_bundle = true
+                endif
+                if pass == 1 and is_bundle
+                  continue
+                endif
+                if pass == 2 and is_bundle == false
+                  continue
+                endif
+                assign shown = shown | plus: 1
+                if shown > section.settings.max_products
+                  break
+                endif
+                render 'product-card', card_product: product
+              endfor
             endfor
           -%}
         </div>

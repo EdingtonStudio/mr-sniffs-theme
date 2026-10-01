@@ -20,10 +20,10 @@ the headless site used:
 
 | Key | Type | Example |
 | --- | --- | --- |
-| `custom.note_pairing` | single line text | Sandalwood + Black Pepper |
+| `custom.note_pairing` | single line text | Warm resin + citrus peel |
 | `custom.mood_tags` | list of single line text | ["Bold", "Smoky"] |
 | `custom.burn_time` | single line text | ~50 min / stick |
-| `custom.flavor_tag_color` | single line text | #E06666 |
+| `custom.flavor_tag_color` | single line text | #A6D7DC |
 
 ## Development
 
